@@ -1,22 +1,18 @@
 const express = require('express')
-const usersController = require('./api/users.controller')
-const todosController = require('./api/todos.controller')
+const usersController = require('./api/users/users.controller')
+//const todosController = require('./api/todos/todos.controller')
 require('dotenv').config()
-
-var pgp = require("pg-promise")(/*options*/);
-
-var db = pgp(`postgres://${process.env.db_user}:${process.env.db_password}@${process.env.db_host}:${process.env.db_port}/${process.env.db_name}`);
-
 
 const app = express()
 const port = 3000
 
 //routes
-//app.use(usersController)
+app.use(usersController)
 //app.use(todosController)
 
 app.get("/", (req, res) => {
 	return res.status(200).send("Hello World");
+
 })
 
 app.listen(port, async () => {

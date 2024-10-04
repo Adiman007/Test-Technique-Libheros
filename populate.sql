@@ -1,8 +1,9 @@
 CREATE TABLE IF NOT EXISTS users (
     id SERIAL PRIMARY KEY,
-        username VARCHAR(255) NOT NULL,
-        email VARCHAR(255) NOT NULL UNIQUE,
-        password VARCHAR(255) NOT NULL
+    name VARCHAR(255) NOT NULL,
+    last_name VARCHAR(255) NOT NULL,
+    email VARCHAR(255) NOT NULL UNIQUE,
+    password VARCHAR(255) NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS todos (
@@ -17,10 +18,10 @@ CREATE TABLE IF NOT EXISTS todos (
 );
 
 -- Insert fake users
-INSERT INTO users (username, email, password) VALUES
-('user1', 'user1@example.com', 'password1'),
-('user2', 'user2@example.com', 'password2'),
-('user3', 'user3@example.com', 'password3');
+INSERT INTO users (name,last_name, email, password) VALUES
+('user1','lastN1','user1@example.com', 'password1'),
+('user2','lastN2','user2@example.com', 'password2'),
+('user3','lastN3','user3@example.com', 'password3');
 
 -- Insert todos
 INSERT INTO todos (user_id, title, description, long_description, completed, end_date) VALUES
