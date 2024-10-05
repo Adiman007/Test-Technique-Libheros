@@ -1,6 +1,8 @@
 const express = require('express')
 const usersController = require('./api/users/users.controller')
-//const todosController = require('./api/todos/todos.controller')
+const todosController = require('./api/todos/todos.controller')
+const todoListController = require('./api/todolist/todolist.controller')
+
 require('dotenv').config()
 const db = require('./db_connection.js')
 const bodyParser = require('body-parser')
@@ -20,7 +22,8 @@ app.use(
 
 //routes
 app.use(usersController)
-//app.use(todosController)
+app.use(todosController)
+app.use(todoListController)
 
 app.get("/", (req, res) => {
 	return res.status(200).send("Hello World");
