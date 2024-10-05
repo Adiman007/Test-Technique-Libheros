@@ -3,16 +3,16 @@
 - read the "Test Libheros.pdf" file for the prerequies  
 
 - Backend using Express.js
-      * add a .env file in Backend directory with :
-          - database info :
-            * DB_USER
-            * db_password
-            * db_host
-            * db_port
-            * db_name
-          - backend info :
-            * port
-            * JWT_SECRET
+  + add a .env file in Backend directory with the following variables :
+     + database info :
+       * DB_USER
+       * db_password
+       * db_host
+       * db_port
+       * db_name
+     + backend info :
+       * port
+       * JWT_SECRET
 
 - Frontend using React.js 
 
