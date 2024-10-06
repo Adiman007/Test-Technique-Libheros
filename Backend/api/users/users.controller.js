@@ -61,7 +61,7 @@ router.post('/login', async (req, res) => {
     if (!await bcrypt.compare(password,user[0].password)) {
         return res.status(400).send("Invalid email or password")
     }
-	const token = await createJWT(user.id)
+	const token = await createJWT(user[0].id)
 	return res.status(200).send({token})
 })
 

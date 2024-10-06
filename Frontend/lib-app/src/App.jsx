@@ -9,10 +9,9 @@ const App = () => {
   return (
     <Router>
       <Routes>
-        <Route path="/login" element={<LoginPage onLogin={setIsAuthenticated} />}></Route>
+        <Route path="/login" element={<LoginPage setIsAuthenticated={setIsAuthenticated} />}></Route>
         <Route path="/main" element={isAuthenticated ? <MainPage /> : <Navigate to="/login" />}></Route>
       </Routes>
-      <Navigate from="/" to="/login" />
     </Router>
   );
 };

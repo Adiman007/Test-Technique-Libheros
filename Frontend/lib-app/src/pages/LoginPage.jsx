@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import '../styles/LoginPage.css';
+import {useNavigate } from 'react-router-dom';
 
-const LoginPage = () => {
+const LoginPage = (props) => {
     const [formData, setFormData] = useState({
         firstName: '',
         lastName: '',
@@ -11,6 +12,8 @@ const LoginPage = () => {
         confirmPassword: ''
     });
     const [isLogin, setIsLogin] = useState(false);
+
+    const navigate = useNavigate()
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -39,6 +42,9 @@ const LoginPage = () => {
                     console.log('Login successful:', data);
                     // Save the token in localStorage or state
                     localStorage.setItem('jwt', data.token);
+                    // Redirect to main page
+                    props.setIsAuthenticated(true);
+                    navigate('/main');
                 } else {
                     console.error('Login failed:', data);
                     alert('Invalid email or password');
