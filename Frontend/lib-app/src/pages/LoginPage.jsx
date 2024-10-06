@@ -8,9 +8,7 @@ const LoginPage = () => {
         email: '',
         confirmEmail: '',
         password: '',
-        confirmPassword: '',
-        loginEmail: '',
-        loginPassword: ''
+        confirmPassword: ''
     });
     const [isLogin, setIsLogin] = useState(false);
 
@@ -40,7 +38,7 @@ const LoginPage = () => {
                 if (data.token) {
                     console.log('Login successful:', data);
                     // Save the token in localStorage or state
-                    localStorage.setItem('token', data.token);
+                    localStorage.setItem('jwt', data.token);
                 } else {
                     console.error('Login failed:', data);
                     alert('Invalid email or password');
