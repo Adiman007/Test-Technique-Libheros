@@ -45,7 +45,6 @@ async function UserExist(email) {
 
 router.post('/login', async (req, res) => {
     console.log("POST /login")
-
     const { email, password } = req.body;
 
     if (!email || !password) {
@@ -56,12 +55,10 @@ router.post('/login', async (req, res) => {
         .then((data) => data)
         .catch((error) => null)
 
-    console.log(user)
     if (!user || user.length == 0) {
         return res.status(400).send("Invalid email or password")
     }
     if (!await bcrypt.compare(password,user[0].password)) {
-        console.log("not here")
         return res.status(400).send("Invalid email or password")
     }
 	const token = await createJWT(user.id)
