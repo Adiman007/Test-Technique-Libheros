@@ -6,6 +6,7 @@ const todoListController = require('./api/todolist/todolist.controller')
 require('dotenv').config()
 const db = require('./db_connection.js')
 const bodyParser = require('body-parser')
+const cors = require('cors')
 
 const app = express()
 const port = 3000
@@ -19,6 +20,7 @@ app.use(
     extended: true,
   })
 )
+app.use(cors())
 
 //routes
 app.use(usersController)
