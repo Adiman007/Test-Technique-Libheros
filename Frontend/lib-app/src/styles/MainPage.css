@@ -15,6 +15,12 @@
   justify-content: center;
   align-items: center;
   height: 100vh; /* Make sure the main content takes the full height of the viewport */
+
+  width: 100vw; /* Full viewport width */
+  height: 100vh; /* Full viewport height */
+  margin-left: 0; /* Reset margin */
+  margin-right: 0; /* Reset margin */
+
 }
 
 .main-content.with-sidebar {
@@ -41,3 +47,4 @@
 .toggle-sidebar-button:hover {
  background-color: rgb(255, 159, 67);;
 }
+
