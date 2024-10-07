@@ -38,11 +38,8 @@ const LoginPage = (props) => {
             })
             .then(response => response.json())
             .then(data => {
-                if (data.token) {
-                    console.log('Login successful:', data);
-                    // Save the token in localStorage or state
-                    localStorage.setItem('jwt', data.token);
-                    // Redirect to main page
+                if (data.token) {   
+                    localStorage.setItem('jwt', data.token);    
                     props.setIsAuthenticated(true);
                     navigate('/main');
                 } else {
@@ -77,7 +74,6 @@ const LoginPage = (props) => {
             })
             .then(response => response.json())
             .then(data => {
-                console.log('Success:', data);
             })
             .catch((error) => {
                 console.error('Error:', error);

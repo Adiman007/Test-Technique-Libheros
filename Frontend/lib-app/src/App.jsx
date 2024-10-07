@@ -4,7 +4,7 @@ import LoginPage from './pages/LoginPage';
 import MainPage from './pages/MainPage';
 
 const App = () => {
-  const [isAuthenticated, setIsAuthenticated] = useState(true); // Change to false
+  const [isAuthenticated, setIsAuthenticated] = useState(false); 
 
   return (
     <Router>

@@ -1,12 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import NewTaskForm from '../components/NewTask';
+import NewTaskForm from './NewTask';
+import TodoComponent from './TodoComponent';
+import RightSidebar from './RightSideBar';
 import '../styles/SelectedList.css';
 
-const SelectedList = ({ todoList }) => {
+const SelectedList = ({ todoList,Selectedtodo }) => {
   const [todos, setTodos] = useState([]);
   const [loading, setLoading] = useState(true);
   const [showCompleted, setShowCompleted] = useState(false);
+  const [selectedTask, setSelectedTask] = useState(null);
 
   useEffect(() => {
     const fetchTodos = async () => {
@@ -23,24 +26,27 @@ const SelectedList = ({ todoList }) => {
     if (todoList) {
       fetchTodos();
     }
-  }, [todoList]);
 
-  const handleFlagClick = async (todo) => {
-    try {
-      const updatedTodo = { ...todo, completed: !todo.completed };
-      await axios.put(`http://localhost:3000/todos/${todo.id}`, updatedTodo);
-      setTodos(todos.map(t => (t.id === todo.id ? updatedTodo : t)));
-    } catch (error) {
-      console.error('Error updating todo:', error);
-    }
-  };
+    setSelectedTask(null)
+  }, [todoList]);
 
   const handleTaskAdded = (newTask) => {
     setTodos((prevTodos) => [...prevTodos, newTask]);
   };
 
+  const handleTodoUpdate = (updatedTodo) => {
+    setTodos(todos.map(todo => (todo.id === updatedTodo.id ? updatedTodo : todo)));
+  };
+
   const toggleCompletedVisibility = () => {
     setShowCompleted(prev => !prev);
+  };
+  const onSelect = (todo) => {
+    setSelectedTask(todo);
+  }
+  
+  const handleDeleteTodo = (todoId) => {
+    setTodos(todos.filter(todo => todo.id !== todoId)); 
   };
 
   if (loading) {
@@ -57,22 +63,15 @@ const SelectedList = ({ todoList }) => {
         <div className="task-section">
           <h3>All Tasks</h3>
           <ul>
-            {todos.map(todo => (
-              <li key={todo.id}>
-                {todo.title}
-                <span
-                  onClick={() => handleFlagClick(todo)}
-                  style={{
-                    cursor: 'pointer',
-                    marginLeft: '10px',
-                    color: todo.completed ? 'green' : 'black',
-                    fontSize: '1.2em',
-                  }}
-                >
-                  {todo.completed ? '✔️' : '🏳️'}
-                </span>
-              </li>
-            ))}
+          {todos.filter(todo => todos).length > 0 ? (
+                  todos.filter(todo => !todo.completed).map(todo => (
+                    <li key={todo.id}>
+                        <TodoComponent todos ={todos} todo={todo} onUpdate={handleTodoUpdate} onSelect={onSelect}/>
+                    </li>
+                  ))
+                ) : (
+                  <li>No tasks for this todolist.</li>
+                )}
           </ul>
         </div>
 
@@ -88,18 +87,7 @@ const SelectedList = ({ todoList }) => {
                 {todos.filter(todo => todo.completed).length > 0 ? (
                   todos.filter(todo => todo.completed).map(todo => (
                     <li key={todo.id}>
-                      {todo.title}
-                      <span
-                        onClick={() => handleFlagClick(todo)}
-                        style={{
-                          cursor: 'pointer',
-                          marginLeft: '10px',
-                          color: 'green',
-                          fontSize: '1.2em',
-                        }}
-                      >
-                        ✔️
-                      </span>
+                        <TodoComponent todos ={todos} todo={todo} onUpdate={handleTodoUpdate} onSelect={onSelect}/>
                     </li>
                   ))
                 ) : (
@@ -109,6 +97,11 @@ const SelectedList = ({ todoList }) => {
             </>
           )}
         </div>
+        {selectedTask && (<RightSidebar
+          selectedTask={selectedTask}
+          onClose={() => setSelectedTodo(null)} 
+          onDelete={handleDeleteTodo} 
+        />)}
       </div>
     </div>
   );

@@ -21,6 +21,7 @@ CREATE TABLE IF NOT EXISTS todos (
     long_description TEXT,
     completed BOOLEAN DEFAULT FALSE,
     end_date DATE NOT NULL,
+    creation_date DATE NOT NULL,
     FOREIGN KEY (todolist_id) REFERENCES todo_list(id) ON DELETE CASCADE
 );
 
@@ -33,11 +34,11 @@ INSERT INTO todo_list (name, user_id) VALUES
 ('Todo List 1', 1),
 ('Todo List 2', 2);
 
-INSERT INTO todos (todolist_id, title, long_description, completed, end_date) VALUES
-(1, 'Buy groceries', 'Buy milk, eggs, and bread', FALSE, '2024-12-01'),
-(1, 'Call plumber', 'Fix the kitchen sink', FALSE, '2024-12-05'),
-(2, 'Finish project', 'Complete the project report', TRUE, '2024-11-30'),
-(2, 'Book flight', 'Book flight tickets for vacation', FALSE, '2024-12-10');
+INSERT INTO todos (todolist_id, title, long_description, completed, end_date,creation_date) VALUES
+(1, 'Buy groceries', 'Buy milk, eggs, and bread', FALSE, '2024-12-01','2024-10-06'),
+(1, 'Call plumber', 'Fix the kitchen sink', FALSE, '2024-12-05','2024-10-06'),
+(2, 'Finish project', 'Complete the project report', TRUE, '2024-11-30','2024-10-06'),
+(2, 'Book flight', 'Book flight tickets for vacation', FALSE, '2024-12-10','2024-10-06');
 
 select * from todos;
 select * from users;
