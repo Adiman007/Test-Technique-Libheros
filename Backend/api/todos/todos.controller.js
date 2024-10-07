@@ -47,6 +47,21 @@ router.delete('/todo/:id', async (req, res) => {
         .catch((error) => res.status(404).send(error))
 })
 
+router.put('/todo/:id', async (req, res) => {
+    console.log("PUT /todo/:id")
+    const id = parseInt(req.params.id)
+    const title = req.body?.title;
+    const long_description = req.body?.long_description;
+    const completed = req.body?.completed;
+    const end_date = req.body?.end_date;
+    if (!title && !long_description && !completed && !end_date) {
+        return res.status(400).send("Please provide at least one field to update")
+    }
+    return await db.query('UPDATE todos SET title = $1, long_description = $2, completed = $3, end_date = $4 WHERE id = $5', [title, long_description, completed, end_date, id])
+        .then(() => res.status(200).send("Todo updated"))
+        .catch((error) => res.status(404).send(error))
+})
+
 
 
 
