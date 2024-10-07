@@ -35,7 +35,7 @@ router.post('/todolist', async (req, res) => {
     }
 
     return await db.query('INSERT INTO todo_list (name,user_id) VALUES ($1, $2)', [name,user_id])
-        .then(() => res.status(201).send("Todolist added"))
+        .then(() => res.status(201).send(req.body))
         .catch((error) => res.status(404).send(error))
 })
 

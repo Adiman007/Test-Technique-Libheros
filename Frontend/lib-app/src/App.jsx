@@ -4,15 +4,14 @@ import LoginPage from './pages/LoginPage';
 import MainPage from './pages/MainPage';
 
 const App = () => {
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [isAuthenticated, setIsAuthenticated] = useState(false); 
 
   return (
     <Router>
       <Routes>
-        <Route path="/login" element={<LoginPage onLogin={setIsAuthenticated} />}></Route>
+        <Route path="/login" element={<LoginPage setIsAuthenticated={setIsAuthenticated} />}></Route>
         <Route path="/main" element={isAuthenticated ? <MainPage /> : <Navigate to="/login" />}></Route>
       </Routes>
-      <Navigate from="/" to="/login" />
     </Router>
   );
 };

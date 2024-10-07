@@ -1,0 +1,50 @@
+.main-page {
+  display: flex;
+  height: 100vh; /* Full viewport height */
+  background-color: rgb(240, 242, 245); /* Light Grey background */
+  color: rgb(51, 51, 51); /* Dark Grey text color */
+  font-family: Arial, sans-serif; /* Font for the body text */
+  
+}
+.main-content {
+  flex-grow: 1;
+  padding: 20px;
+  transition: margin-left 0.3s ease;
+  position: relative; /* Ensure the button is positioned relative to the main content */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; /* Make sure the main content takes the full height of the viewport */
+
+  width: 100vw; /* Full viewport width */
+  height: 100vh; /* Full viewport height */
+  margin-left: 0; /* Reset margin */
+  margin-right: 0; /* Reset margin */
+
+}
+
+.main-content.with-sidebar {
+  margin-left: 300px;
+}
+
+.main-content.without-sidebar {
+  margin-left: 0;
+}
+
+.toggle-sidebar-button {
+  position: absolute; /* Position the button absolutely */
+  top: 10px; /* Distance from the top */
+  left: 10px; /* Distance from the left */
+  padding: 10px 20px; /* Button padding */
+  background-color: rgb(0, 123, 255); /* Button background color */
+  color: white; /* Button text color */
+  border: none; /* Remove border */
+  border-radius: 5px; /* Rounded corners */
+  cursor: pointer; /* Change cursor to pointer on hover */
+  font-size: 16px; /* Font size */
+}
+
+.toggle-sidebar-button:hover {
+ background-color: rgb(255, 159, 67);;
+}
+
