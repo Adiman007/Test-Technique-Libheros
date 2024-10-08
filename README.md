@@ -16,7 +16,7 @@
        * port
        * JWT_SECRET
   
-  + open a terminal => move to Backend directory => run `bun run index.js`
+  + open a terminal => move to Backend directory => run `bun install` then `bun run index.js`
 
 - Frontend using React.js 
   + open another terminal => move to Frontend/lib-app directory => run `bun install` then `bun run dev`
