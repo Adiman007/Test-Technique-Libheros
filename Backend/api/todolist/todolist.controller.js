@@ -1,7 +1,6 @@
 const router = require('express').Router()
 const db = require('../../db_connection.js')
 
-// default /users route
 router.get('/todolist',async (req, res) => {
     console.log("GET /todolist")
 	return await db.query('SELECT * FROM todo_list')
@@ -26,16 +25,14 @@ router.post('/todolist', async (req, res) => {
     }
 
     if (await TodolistExist(name,user_id)) {
-
         return res.status(400).send("invalid name");
     }
     if (await UserExist(user_id)) {
-
         return res.status(400).send("invalid user_id");
     }
 
-    return await db.query('INSERT INTO todo_list (name,user_id) VALUES ($1, $2)', [name,user_id])
-        .then(() => res.status(201).send(req.body))
+    return await db.query('INSERT INTO todo_list (name,user_id) VALUES ($1, $2) RETURNING *', [name,user_id])
+        .then((result) => res.status(201).send(result[0]))
         .catch((error) => res.status(404).send(error))
 })
 

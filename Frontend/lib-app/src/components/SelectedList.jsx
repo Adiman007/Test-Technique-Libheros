@@ -99,7 +99,7 @@ const SelectedList = ({ todoList,Selectedtodo }) => {
         </div>
         {selectedTask && (<RightSidebar
           selectedTask={selectedTask}
-          onClose={() => setSelectedTodo(null)} 
+          onClose={() => setSelectedTask(null)} 
           onDelete={handleDeleteTodo} 
         />)}
       </div>

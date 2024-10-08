@@ -57,7 +57,7 @@ const LeftSidebar = ({ isVisible, userId, onSelectTodoList }) => {
   };
 
   const handleSelectTodoList = (todoList) => {
-    onSelectTodoList(todoList); // Pass selected list up to MainPage
+    onSelectTodoList(todoList); 
   };
 
   return (
@@ -73,7 +73,7 @@ const LeftSidebar = ({ isVisible, userId, onSelectTodoList }) => {
                   key={list.id}
                   todoList={list}
                   onDelete={handleDeleteTodoList}
-                  onSelect={() => handleSelectTodoList(list)} // Handle selection
+                  onSelect={() => handleSelectTodoList(list)}
                 />
               ))
             ) : (

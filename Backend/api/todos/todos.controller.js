@@ -1,7 +1,6 @@
 const router = require('express').Router()
 const db = require('../../db_connection.js')
 
-// default /users route
 router.get('/todos',async (req, res) => {
     console.log("GET /todos")
 	return await db.query('SELECT * FROM todos')
@@ -34,8 +33,8 @@ router.post('/todo', async (req, res) => {
     if (end_date_obj <= creation_date) {
         return res.status(400).send("end_date must be greater than the current date");
     }
-    return await db.query('INSERT INTO todos (todolist_id,title, long_description,completed, end_date,creation_date) VALUES ($1, $2,$3,$4,$5,$6)', [todolist_id,title, long_description,completed,end_date,creation_date])
-        .then(() => res.status(201).send("Todo added"))
+    return await db.query('INSERT INTO todos (todolist_id,title, long_description,completed, end_date,creation_date) VALUES ($1, $2,$3,$4,$5,$6) RETURNING *', [todolist_id,title, long_description,completed,end_date,creation_date])
+        .then((result) => res.status(201).send(result[0]))
         .catch((error) => res.status(404).send(error))
 })
 
